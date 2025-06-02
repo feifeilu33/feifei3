@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A bit about me - Lu Wanshan's Personal Blog</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 15px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 6px 12px;
+            display: inline-block;
+        }
+
+        /* Bauhaus style active indicator */
+        nav ul li.active a {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+
+        main {
+            padding-top: 70px; /* Space for the fixed header */
+        }
+
+        .about-section h1 {
+            font-family: 'Futura', sans-serif;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 40px !important;
+        }
+        .about-section p {
+            font-family: 'Open Sans', sans-serif;
+            color: #444;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: white;
+        }
+        .about-section {
+            padding-left: 5%; /* Left 5% blank */
+            padding-right: 5%;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            max-width: 800px; /* Max width to avoid overly long text */
+            margin-left: 0;   /* Ensure not auto-centered */
+        }
+        .about-section h1,
+        .about-section p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="/cc.html">Home</a></li>
+                <li class="active"><a href="/about.html">About Me</a></li>
+                <li><a href="/projects/index.html">Projects</a></li>
+                <li><a href="/resources/index.html">Learning Resources</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="about-section">
+        <h1>A bit about me</h1>
+        <p></p>
+        <p>i am gonna write here.</p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Lu Wanshan. All rights reserved.</p>
+</footer>
+
+<script>
+    // This script is kept for consistency with the homepage, but it won't be used on this page.
+    function showSection(sectionId) {}
+</script>
+
+</body>
+</html>

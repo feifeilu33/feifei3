@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Projects - Lu Wanshan's Personal Blog</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 15px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 6px 12px;
+            display: inline-block;
+        }
+
+        /* Bauhaus style active indicator */
+        nav ul li.active a {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+
+        main {
+            padding-top: 70px; /* Space for the fixed header */
+        }
+
+        .projects-section h1 {
+            font-family: 'Futura', sans-serif;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 40px !important;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+            color: #000;
+        }
+
+        .project-card p {
+            font-family: 'Open Sans', sans-serif;
+            color: #444;
+        }
+
+        .project-card a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: white;
+        }
+
+        .projects-section {
+            padding-top: 60px;
+            padding-bottom: 60px;
+            max-width: 800px;
+            margin: 0 auto; /* 整个 section 居中 */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 内容垂直排列并整体居中 */
+            gap: 30px; /* 卡片之间的间距 */
+        }
+
+        .projects-section h1 {
+            align-self: center; /* 确保标题也居中 */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="/cc.html">Home</a></li>             
+                <li><a href="/about/index.html">About Me</a></li>
+                <li><a href="/projects/index.html">Projects</a></li>
+                <li class="active"><a href="#">Learning Resources</a></li>   
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="projects-section">
+        <h1>Learning Resources</h1>
+
+        <div class="project-card">
+            <h3>Project One</h3>
+            <p>This is a brief description of my first project. I built it using HTML, CSS, and JavaScript to demonstrate basic web development concepts.</p>
+            <a href="#">View Code</a>
+        </div>
+
+        <div class="project-card">
+            <h3>Project Two</h3>
+            <p>In this project, I explored more advanced techniques like responsive design and interactive elements with JavaScript frameworks.</p>
+            <a href="#">View Code</a>
+        </div>
+
+        <div class="project-card">
+            <h3>Project Three</h3>
+            <p>A small utility or tool that solves a specific problem or enhances user experience on the web. This project was fun to build!</p>
+            <a href="#">View Code</a>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Lu Wanshan. All rights reserved.</p>
+</footer>
+
+<script>
+    // This script is kept for consistency with the homepage, but it won't be used on this page.
+    function showSection(sectionId) {}
+</script>
+
+</body>
+</html>
