@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Projects - Lu Wanshan's Personal Blog</title>
+    <title>Learning Resources - Lu Wanshan's Personal Blog</title>
     <base href="https://feifeilu33.github.io/feifei3/">
     <style>
         body {
@@ -54,66 +54,67 @@
         }
 
         main {
-            padding-top: 70px; /* Space for the fixed header */
-        }
-
-        .projects-section h1 {
-            font-family: 'Futura', sans-serif;
-            font-weight: bold;
-            color: #000;
-            margin-bottom: 40px !important;
-        }
-
-        .project-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            padding: 20px;
-            margin-bottom: 30px;
-            transition: transform 0.2s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-card h3 {
-            margin-top: 0;
-            color: #000;
-        }
-
-        .project-card p {
-            font-family: 'Open Sans', sans-serif;
-            color: #444;
-        }
-
-        .project-card a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #007BFF;
-            text-decoration: none;
+            padding-top: 70px;
         }
 
         footer {
             text-align: center;
             padding: 20px 0;
-            background-color: #333;
+            background-color: #111;
             color: white;
         }
 
-        .projects-section {
-            padding-top: 60px;
-            padding-bottom: 60px;
-            max-width: 800px;
-            margin: 0 auto; /* 整个 section 居中 */
+        /* Resources Section */
+        .resources-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* 内容垂直排列并整体居中 */
-            gap: 30px; /* 卡片之间的间距 */
+            align-items: center;
         }
 
-        .projects-section h1 {
-            align-self: center; /* 确保标题也居中 */
+        .resources-section h1 {
+            font-family: 'Futura', sans-serif;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* Grid Layout - 俄罗斯方块式布局 */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            width: 100%;
+            justify-items: center;
+        }
+
+        .resource-grid a {
+            background-color: #fff;
+            border: 2px solid #000;
+            padding: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border-radius: 0; /* Bauhaus 风格：无圆角 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .resource-grid a:hover {
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -133,27 +134,23 @@
 </header>
 
 <main>
-    <section class="projects-section">
+    <section class="resources-section">
         <h1>Learning Resources</h1>
-
-        <div class="project-card">
-            <h3>Project One</h3>
-            <p>This is a brief description of my first project. I built it using HTML, CSS, and JavaScript to demonstrate basic web development concepts.</p>
-            <a href="#">View Code</a>
-        </div>
-
-        <div class="project-card">
-            <h3>Project Two</h3>
-            <p>In this project, I explored more advanced techniques like responsive design and interactive elements with JavaScript frameworks.</p>
-            <a href="#">View Code</a>
-        </div>
-
-        <div class="project-card">
-            <h3>Project Three</h3>
-            <p>A small utility or tool that solves a specific problem or enhances user experience on the web. This project was fun to build!</p>
-            <a href="#">View Code</a>
-        </div>
-
+        <h2>Cheat Sheets</h2>
+        <ul class="resource-list">
+            <li><a href="cheatsheets/Cheat_Sheet_-_Scikit-Learn.pdf">Scikit-Learn</a></li>
+            <li><a href="cheatsheets/Cheat_Sheet_-_Seaborn.pdf">Seaborn</a></li>
+            <li><a href="cheatsheets/data-visualization.pdf">Data Visualization</a></li>
+            <li><a href="cheatsheets/Jupyterlab_Cheat_Sheet.pdf">JupyterLab</a></li>
+            <li><a href="cheatsheets/Keras_Cheat_Sheet_gssmi8.pdf">Keras</a></li>
+            <li><a href="cheatsheets/Markdown_Cheat_Sheet.pdf">Markdown</a></li>
+            <li><a href="cheatsheets/matplotlib_cheatsheets.pdf">Matplotlib</a></li>
+            <li><a href="cheatsheets/numpy_cheatsheet.pdf">NumPy</a></li>
+            <li><a href="cheatsheets/Pandas_Cheat_Sheet.pdf">Pandas</a></li>
+            <li><a href="cheatsheets/pytorch-cheatsheet-en.pdf">PyTorch</a></li>
+            <li><a href="cheatsheets/sql-basics-cheat-sheet.pdf">SQL Basics</a></li>
+            <li><a href="cheatsheets/tableau_Charts.pdf">Tableau</a></li>
+        </ul>
     </section>
 </main>
 
