@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>使用 LSTM 实现邮件分类</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center; /* 所有文字居中 */
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        main {
+            padding-top: 70px; /* Space for the fixed header */
+        }
+
+        .welcome-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: left; /* 内容居中 */
+        }
+
+        .welcome-section h1 {
+            font-family: 'Futura', sans-serif;
+            font-weight: bold;
+            color: #000;
+            font-size: 28px;
+        }
+
+        .welcome-section h2 {
+            font-family: 'Futura', sans-serif;
+            font-weight: bold;
+            color: #000;
+            font-size: 18px; /* 小标题字号更小 */
+            margin-top: 40px;
+        }
+
+        .welcome-section p {
+            font-family: 'Open Sans', sans-serif;
+            color: #444;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        .code-box {
+            background-color: #262626; /* 黑色背景 */
+            color: #2b2a2a; /* 白色文字 */
+            margin-top: 5px;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            border: none; /* 无边框 */
+            text-align: left; /* 代码本身左对齐，便于阅读 */
+            display: inline-block;
+            width: 100%;
+        }
+
+        pre {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #aa3d3d;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: transparent;
+            color: #ffffff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="index.html">back</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="welcome-section">
+        <h1>Email Fraud Detection Using LSTM Model</h1>
+        <p>This page demonstrates how to build a neural network model based on LSTM for classifying emails (spam or not spam).</p>
+
+        <div class="links">
+            <a href="projects/email_full_code.html" target="_blank">View complete code</a>
+        </div>
+
+        <h2>Step 1: Import Necessary Libraries</h2>
+        <p>Before getting started, we need to import various modules required for building the model.</p>
+        <div class="code-box">
+            <pre><code>
+import numpy as np
+from tensorflow.keras.layers import Input, Embedding, LSTM, Dense
+from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+            </code></pre>
+        </div>
+
+        <h2>Step 2: Define the Discriminator Function</h2>
+        <p>We define a function named create_discriminator which takes maximum sequence length and vocabulary size as parameters, and returns an LSTM-based discriminator model.</p>
+        <div class="code-box">
+            <pre><code>
+def create_discriminator(max_sequence_length, vocab_size):
+    discriminator_input = Input(shape=(max_sequence_length,))
+    
+    x = Embedding(input_dim=vocab_size, output_dim=embedding_dim)(discriminator_input)
+    x = LSTM(units=64)(x)  # LSTM layer with 64 units
+    
+    spam_classifier_output = Dense(1, activation='sigmoid')(x)
+    
+    discriminator_model = Model(discriminator_input, spam_classifier_output)
+    return discriminator_model
+            </code></pre>
+        </div>
+
+        <h2>Step 3: Set Up Discriminator Components</h2>
+        <p>The relevant parameters of the discriminator are set up, and the discriminator model is compiled using the Adam optimizer. The loss function is binary cross-entropy, and the evaluation metric is accuracy.</p>
+        <div class="code-box">
+            <pre><code>
+max_sequence_length = 100
+vocab_size = 10000
+embedding_dim = 100
+
+discriminator = create_discriminator(max_sequence_length, vocab_size)
+
+optimizer = Adam(learning_rate=0.0002, beta_1=0.5)
+discriminator.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
+            </code></pre>
+        </div>
+
+        <h2>Step 4: Prepare Data</h2>
+        <p>Convert the text and labels from the dataset into list format for subsequent processing.</p>
+        <div class="code-box">
+            <pre><code>
+email_text = data['text'].tolist()
+labels = data['label_num'].tolist()
+            </code></pre>
+        </div>
+
+        <h2>Step 5: Create and Fit the Tokenizer to Email Texts</h2>
+        <p>Create a Tokenizer object and fit it to the email texts data using the fit_on_texts method.</p>
+        <div class="code-box">
+            <pre><code>
+tokenizer = Tokenizer(num_words=vocab_size)
+tokenizer.fit_on_texts(email_text)
+            </code></pre>
+        </div>
+
+        <h2>Step 6: Convert Texts to Numeric Sequences</h2>
+        <p>Use the texts_to_sequences method to convert text data into numeric sequences where each word is replaced by its index in the vocabulary.</p>
+        <div class="code-box">
+            <pre><code>
+sequences = tokenizer.texts_to_sequences(email_text)
+            </code></pre>
+        </div>
+
+        <h2>Step 7: Pad Sequences to Ensure Consistent Length</h2>
+        <p>Use the pad_sequences method to either pad or truncate sequences so that they all have the same length max_sequence_length.</p>
+        <div class="code-box">
+            <pre><code>
+padded_sequences = pad_sequences(sequences, maxlen=max_sequence_length)
+            </code></pre>
+        </div>
+
+        <h2>Step 8: Convert Labels to NumPy Array</h2>
+        <p>Convert the list of labels into a NumPy array for further processing.</p>
+        <div class="code-box">
+            <pre><code>
+labels = np.array(labels)
+            </code></pre>
+        </div>
+
+        <h2>Step 9: Shuffle Data and Labels</h2>
+        <p>Generate a randomly permuted index list and use this index list to reorder the padded sequences and labels, thus shuffling the data order.</p>
+        <div class="code-box">
+            <pre><code>
+shuffle_indices = np.random.permutation(len(padded_sequences))
+padded_sequences = padded_sequences[shuffle_indices]
+labels = labels[shuffle_indices]
+            </code></pre>
+        </div>
+
+        <h2>Step 10: Train the Discriminator</h2>
+        <p>Train using nested loops; the outer loop iterates over epochs, while the inner loop iterates over batches.</p>
+        <div class="code-box">
+            <pre><code>
+batch_size = 32
+num_epochs = 10
+num_batches = len(padded_sequences) // batch_size
+
+for epoch in range(num_epochs):
+    for batch in range(num_batches):
+        batch_data = padded_sequences[batch * batch_size : (batch + 1) * batch_size]
+        batch_labels = labels[batch * batch_size : (batch + 1) * batch_size]
+
+        discriminator_loss = discriminator.train_on_batch(batch_data, batch_labels)
+
+        print(f"Epoch {epoch + 1}, Batch {batch + 1}/{num_batches}, Loss: {discriminator_loss[0]}, Accuracy: {discriminator_loss[1]}")
+            </code></pre>
+        </div>
+
+        <h2>Step 11: Save Trained Discriminator Weights</h2>
+        <p>Save the trained discriminator weights to a specified file for future use or loading.</p>
+        <div class="code-box">
+            <pre><code>
+discriminator.save_weights('discriminator_weights.weights.h5')
+            </code></pre>
+        </div>
+
+        <h2>Step 12: Classify Sample Emails</h2>
+        <p>After tokenizing and padding sample email texts, use the trained discriminator to classify emails and output prediction results.</p>
+        <div class="code-box">
+            <pre><code>
+sample_email_texts = [
+    "Congratulations! You've won a million dollars!",
+    "Hi there, I hope you're doing well.",
+    "Get a discount on our new products today!"
+]
+
+sequences = tokenizer.texts_to_sequences(sample_email_texts)
+padded_sequences = pad_sequences(sequences, maxlen=max_sequence_length)
+
+predicted_labels = discriminator.predict(padded_sequences)
+
+predicted_classes = ["Spam" if label > 0.5 else "Ham" for label in predicted_labels]
+
+for i, email_text in enumerate(sample_email_texts):
+    print(f"Email {i + 1}: {email_text}")
+    print(f"Predicted Class: {predicted_classes[i]}")
+    print(f"Predicted Score: {predicted_labels[i][0]:.4f}")
+    print()
+            </code></pre>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Lu Wanshan. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

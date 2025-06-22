@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Learning Resources - Lu Wanshan's Personal Blog</title>
-    <base href="https://feifeilu33.github.io/feifei3/">
+    <title>cheatsheets</title>
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
@@ -12,6 +11,7 @@
             background-color: #f4f4f9;
             color: #333;
         }
+
         header {
             background-color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -20,6 +20,7 @@
             top: 0;
             z-index: 1000;
         }
+
         .container {
             width: 90%;
             margin: 0 auto;
@@ -28,16 +29,19 @@
             align-items: center;
             padding: 15px 0;
         }
+
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             display: flex;
         }
+
         nav ul li {
             margin-left: 20px;
             position: relative;
         }
+
         nav ul li a {
             text-decoration: none;
             color: #333;
@@ -46,7 +50,7 @@
             display: inline-block;
         }
 
-        /* Bauhaus style active indicator */
+        /* Bauhaus 风格 active 指示器 */
         nav ul li.active a {
             background-color: black;
             color: white;
@@ -57,64 +61,72 @@
             padding-top: 70px;
         }
 
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #111;
-            color: white;
-        }
-
-        /* Resources Section */
         .resources-section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
+            padding: 100px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .resources-section h1 {
+        h2 {
             font-family: 'Futura', sans-serif;
-            font-weight: bold;
-            color: #000;
+            font-size: 24px;
             margin-bottom: 40px;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
             text-align: center;
         }
 
-        /* Grid Layout - 俄罗斯方块式布局 */
+        /* 马赛克网格布局：每行3个方块，无缝连接 */
         .resource-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0; /* 无间隙 */
             width: 100%;
-            justify-items: center;
+            max-width: 900px;
         }
 
-        .resource-grid a {
-            background-color: #fff;
-            border: 2px solid #000;
-            padding: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #000;
-            text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            border-radius: 0; /* Bauhaus 风格：无圆角 */
+        .resource-item {
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: 150px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #434343;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .resource-grid a:hover {
+        .resource-item:hover {
             background-color: #000;
-            color: #fff;
-            transform: translateY(-5px);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* 不同颜色马赛克风格 */
+        .resource-item:nth-child(1) { background-color: #ffd90069; } /* Gold */
+        .resource-item:nth-child(2) { background-color: #9fd6eb5d; } /* SkyBlue */
+        .resource-item:nth-child(3) { background-color: #90ee9055; } /* LightGreen */
+        .resource-item:nth-child(4) { background-color: #ffb6c15c; } /* Pink */
+        .resource-item:nth-child(5) { background-color: #ffa60064; } /* Orange */
+        .resource-item:nth-child(6) { background-color: #dda0dd6a; } /* Plum */
+        .resource-item:nth-child(7) { background-color: #87cefa69; } /* LightSkyBlue */
+        .resource-item:nth-child(8) { background-color: #32cd3260; } /* LimeGreen */
+        .resource-item:nth-child(9) { background-color: #ffdab953; } /* PeachPuff */
+        .resource-item:nth-child(10){ background-color: #ba55d365; } /* MediumOrchid */
+        .resource-item:nth-child(11){ background-color: #6494ed5f; } /* CornflowerBlue */
+        .resource-item:nth-child(12){ background-color: #dc143c53; } /* Crimson */
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: white;
         }
     </style>
 </head>
@@ -124,44 +136,43 @@
     <div class="container">
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>             
-                <li><a href="about/index.html">About Me</a></li>
-                <li><a href="projects/index.html">Projects</a></li>
-                <li class="active"><a href="#">Learning Resources</a></li>   
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about/index.html">Resume</a></li>
+                <li><a href="../projects/index.html">Projects</a></li>
+                <li class="active"><a href="#">Learning Resources</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
-<main>
-    <section class="resources-section">
-        <h1>Learning Resources</h1>
-        <h2>Cheat Sheets</h2>
-        <ul class="resource-list">
-            <li><a href="cheatsheets/Cheat_Sheet_-_Scikit-Learn.pdf">Scikit-Learn</a></li>
-            <li><a href="cheatsheets/Cheat_Sheet_-_Seaborn.pdf">Seaborn</a></li>
-            <li><a href="cheatsheets/data-visualization.pdf">Data Visualization</a></li>
-            <li><a href="cheatsheets/Jupyterlab_Cheat_Sheet.pdf">JupyterLab</a></li>
-            <li><a href="cheatsheets/Keras_Cheat_Sheet_gssmi8.pdf">Keras</a></li>
-            <li><a href="cheatsheets/Markdown_Cheat_Sheet.pdf">Markdown</a></li>
-            <li><a href="cheatsheets/matplotlib_cheatsheets.pdf">Matplotlib</a></li>
-            <li><a href="cheatsheets/numpy_cheatsheet.pdf">NumPy</a></li>
-            <li><a href="cheatsheets/Pandas_Cheat_Sheet.pdf">Pandas</a></li>
-            <li><a href="cheatsheets/pytorch-cheatsheet-en.pdf">PyTorch</a></li>
-            <li><a href="cheatsheets/sql-basics-cheat-sheet.pdf">SQL Basics</a></li>
-            <li><a href="cheatsheets/tableau_Charts.pdf">Tableau</a></li>
-        </ul>
-    </section>
+<main class="resources-section">
+
+    <h2>Cheat Sheets</h2>
+
+    <!-- 马赛克网格布局 -->
+    <div class="resource-grid">
+        <a href="cheatsheets/Cheat_Sheet_-_Scikit-Learn.pdf" target="_blank" class="resource-item">Scikit-Learn</a>
+        <a href="cheatsheets/Cheat_Sheet_-_Seaborn.pdf" target="_blank" class="resource-item">Seaborn</a>
+        <a href="cheatsheets/data-visualization.pdf" target="_blank" class="resource-item">Data Visualization</a>
+
+        <a href="cheatsheets/Jupyterlab_Cheat_Sheet.pdf" target="_blank" class="resource-item">JupyterLab</a>
+        <a href="cheatsheets/Keras_Cheat_Sheet_gssmi8.pdf" target="_blank" class="resource-item">Keras</a>
+        <a href="cheatsheets/Markdown_Cheat_Sheet.pdf" target="_blank" class="resource-item">Markdown</a>
+
+        <a href="cheatsheets/matplotlib_cheatsheets.pdf" target="_blank" class="resource-item">Matplotlib</a>
+        <a href="cheatsheets/numpy_cheatsheet.pdf" target="_blank" class="resource-item">NumPy</a>
+        <a href="cheatsheets/Pandas_Cheat_Sheet.pdf" target="_blank" class="resource-item">Pandas</a>
+
+        <a href="cheatsheets/pytorch-cheatsheet-en.pdf" target="_blank" class="resource-item">PyTorch</a>
+        <a href="cheatsheets/sql-basics-cheat-sheet.pdf" target="_blank" class="resource-item">SQL Basics</a>
+        <a href="cheatsheets/tableau_Charts.pdf" target="_blank" class="resource-item">Tableau</a>
+    </div>
+
 </main>
 
 <footer>
-    <p>&copy; 2025 Lu Wanshan. All rights reserved.</p>
+    <p>&copy; 2025 Lu Wanshan. Some rights reserved.</p>
 </footer>
-
-<script>
-    // This script is kept for consistency with the homepage, but it won't be used on this page.
-    function showSection(sectionId) {}
-</script>
 
 </body>
 </html>

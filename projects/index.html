@@ -2,16 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Projects - Lu Wanshan's Personal Blog</title>
+    <title>projects</title>
     <base href="https://feifeilu33.github.io/feifei3/">
+
+    <!-- Futura 字体（可选） -->
+    <link href="https://fonts.googleapis.com/css2?family=Futura&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
+        /* 全局设置 */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
             background-color: #f4f4f9;
             color: #333;
+            line-height: 1.6;
+            padding-top: 70px; /* 为固定 header 留出空间 */
         }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header 保留原结构 */
         header {
             background-color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -20,6 +38,7 @@
             top: 0;
             z-index: 1000;
         }
+
         .container {
             width: 90%;
             margin: 0 auto;
@@ -28,16 +47,19 @@
             align-items: center;
             padding: 15px 0;
         }
+
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             display: flex;
         }
+
         nav ul li {
             margin-left: 20px;
             position: relative;
         }
+
         nav ul li a {
             text-decoration: none;
             color: #333;
@@ -46,146 +68,201 @@
             display: inline-block;
         }
 
-        /* Bauhaus style active indicator */
+        /* Bauhaus 风格 active 指示器 */
         nav ul li.active a {
             background-color: black;
             color: white;
             font-weight: bold;
         }
 
+        /* 主体内容区 */
         main {
-            padding-top: 70px; /* Space for the fixed header */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
         .projects-section h1 {
             font-family: 'Futura', sans-serif;
+            font-size: 32px;
             font-weight: bold;
             color: #000;
-            margin-bottom: 40px !important;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        /* 项目卡片网格布局 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .project-card {
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border: 2px solid black;
+            border-radius: 0;
             padding: 20px;
-            margin-bottom: 30px;
-            transition: transform 0.2s ease;
-
-            /* 新增内容 */
-            width: 800px;                  /* 固定宽度 */
-            min-height: 200px;             /* 统一最小高度，保持卡片整齐 */
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Futura', sans-serif;
             display: flex;
-            flex-direction: column;        /* 内容垂直排列 */
-            justify-content: space-between; /* 上下内容撑满卡片 */
+            flex-direction: column;
+            height: 100%;
         }
 
         .project-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid black;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
         }
 
         .project-card h3 {
-            margin-top: 0;
-            color: #000;
+            font-size: 20px;
+            margin: 10px 0;
+            color: black;
         }
 
         .project-card p {
-            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
             color: #444;
-            flex-grow: 1; /* 让文字部分自动填充中间空间 */
+            flex-grow: 1;
         }
 
-        .project-card a {
-            display: inline-block;
-            margin-top: auto; /* 始终贴在底部 */
-            color: #007BFF;
-            text-decoration: none;
+        .project-card .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
         }
 
+        .project-card .links a {
+            color: black;
+            font-weight: bold;
+            font-size: 14px;
+            border-bottom: 2px solid black;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card .links a:hover {
+            opacity: 0.7;
+        }
+
+        /* 卡片点击区域 */
+        .project-card .link-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: transparent;
+        }
+
+        /* Footer */
         footer {
+            background-color: #222;
+            color: white;
             text-align: center;
             padding: 20px 0;
-            background-color: #333;
-            color: white;
+            margin-top: 60px;
         }
 
-        .projects-section {
-            padding-top: 60px;
-            padding-bottom: 60px;
-            max-width: 800px;
-            margin: 0 auto; /* 整个 section 居中 */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* 内容垂直排列并整体居中 */
-            gap: 30px; /* 卡片之间的间距 */
-        }
-
-        .projects-section h1 {
-            align-self: center; /* 确保标题也居中 */
+        @media (max-width: 600px) {
+            .project-card h3 {
+                font-size: 18px;
+            }
+            .project-card p {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 <body>
 
+<!-- Header 保留原样 -->
 <header>
     <div class="container">
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>             
-                <li><a href="about/index.html">About Me</a></li>
-                <li class="active"><a href="projects/index.html">Projects</a></li>   
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about/index.html">Resume</a></li>
+                <li class="active"><a href="projects/index.html">Projects</a></li>
                 <li><a href="resources/index.html">Learning Resources</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
+<!-- Main Content -->
 <main>
     <section class="projects-section">
-        <h1>My Projects</h1>
+        <h1>Featured Projects</h1>
 
-        <div class="project-card">
-            <h3>Job Posting Data Analysis</h3>
-            <p>This project involves a lot of docs.</p>
-            <a href="https://github.com/feifeilu33/IBM-Data-Analyst-Capstone-Project" target="_blank">View Code</a>        
-        </div>
-        
-        <div class="project-card">
-            <h3>Email Fraud Detection (LSTM+GAN)</h3>
-            <p>This project involves using LSTM and GAN techniques to detect email fraud.</p>
-            <a href="projects/Email Fraud Detection (LSTM+GAN).html" target="_blank">View Code</a>        
-        </div>
+        <div class="projects-grid">
 
-        <div class="project-card">
-            <h3>Tesla Stock Price Prediction</h3>
-            <p>This is a course project from IS6423 Business XXXX.</p>
-            <a href="https://raw.githubusercontent.com/feifeilu33/feifei3/main/projects/IS6423_code.html" target="_blank">View Code</a>
-            <a href="projects/IS6423_Report.pdf" target="_blank">View Report</a>
-        </div>
+            <!-- 项目 1 -->
+            <div class="project-card">
+                <a href="projects/jobposting.html" target="_blank" class="link-overlay"></a>
+                <div class="project-image" style="background-image: url('images/jobposting.png');"></div>
+                <h3>Job Posting Data Analysis</h3>
+                <p>This capstone project from the IBM Data Analyst Professional Certificate program applied techniques including API integration, web scraping with BeautifulSoup, data cleaning and normalization using Pandas, exploratory data analysis with Matplotlib and Seaborn, and dashboard development in IBM Cognos Analytics. </p>
+            </div>
 
-        <div class="project-card">
-            <h3>Harry Potter Chatbot</h3>
-            <p>In this project, I explored more advanced techniques like responsive design and interactive elements with JavaScript frameworks.</p>
-            <a href="https://raw.githubusercontent.com/feifeilu33/feifei3/main/projects/IS6620_code.html" target="_blank">View Code</a>
-            <a href="projects/IS6620_report.pdf" target="_blank">View Report</a>
-        </div>
+            <!-- 项目 2 -->
+            <div class="project-card">
+                <a href="projects/email_en.html" target="_blank" class="link-overlay"></a>
+                <div class="project-image" style="background-image: url('images/email.png');"></div>
+                <h3>Email Fraud Detection (LSTM+GAN)</h3>
+                <p>This project applied techniques including Python-based ETL for data preprocessing and label encoding, NLP pipeline engineering with tokenization and sequence embedding for LSTM model building, and adversarial training for GAN discriminator optimization.</p>
+            </div>
 
-        <div class="project-card">
-            <h3>Superstore Power BI Dashboard</h3>
-            <p>A small utility or tool that solves a specific problem or enhances user experience on the web. This project was fun to build!</p>
-            <a href="projects/superstore_power_bi_dashboard.pdf" target="_blank">View Dashboard</a>
-        </div>
+            <!-- 项目 3 -->
+            <div class="project-card">
+                <a href="projects/stock.html" target="_blank" class="link-overlay"></a>
+                <div class="project-image" style="background-image: url('images/stock.png');"></div>
+                <h3>Stock Price Prediction</h3>
+                <p>This project employed NLP techniques to conduct sentiment analysis on Twitter data using the VADER tool, generating sentiment scores. These scores are then incorporated into LSTM models as features, alongside market indices such as the S&P 500 and Nasdaq, for time series forecasting of the stock's closing prices.</p>
+            </div>
 
+            <!-- 项目 4 -->
+            <div class="project-card">
+                <a href="projects/hpchatbot.html" target="_blank" class="link-overlay"></a>
+                <div class="project-image" style="background-image: url('hp.png');"></div>
+                <h3>Harry Potter Chatbot</h3>
+                <p>This is a conversational AI system using RAG. It includes modules for question classification, multi-source information retrieval, and response generation, using book texts, external APIs, and web searches to provide accurate and relevant answers.</p>
+            </div>
+
+            <!-- 项目 5 -->
+            <div class="project-card">
+                <a href="projects/superstore_power_bi_dashboard.pdf" target="_blank" class="link-overlay"></a>
+                <div class="project-image" style="background-image: url('images/superstore.png');"></div>
+                <h3>Superstore Power BI Dashboard</h3>
+                <p>This project utilized Power BI for a comprehensive visual analysis of supermarket sales data, focusing on sales trends, customer behavior, and product performance. The dashboard covered time-based, geographical, customer, and product analysis.</p>
+            </div>
+
+        </div>
     </section>
 </main>
 
+<!-- Footer -->
 <footer>
     <p>&copy; 2025 Lu Wanshan. All rights reserved.</p>
 </footer>
 
 <script>
-    // This script is kept for consistency with the homepage, but it won't be used on this page.
-    function showSection(sectionId) {}
+    // 可用于后续交互扩展
 </script>
 
 </body>
